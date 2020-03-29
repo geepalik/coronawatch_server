@@ -17,4 +17,4 @@ app.use((req, res, next) => {
 app.use('/coronawatch',statsRoutes);
 
 mongoConnect();
-app.listen(3000);
+app.listen(8080);
