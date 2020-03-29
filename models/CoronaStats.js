@@ -16,5 +16,4 @@ module.exports = class CoronaStats {
             .then(results => { return results; })
             .catch(err => console.error('fetchall error: '+err) );
     }
-
 };
