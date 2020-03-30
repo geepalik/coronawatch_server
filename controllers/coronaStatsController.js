@@ -4,25 +4,36 @@ exports.getStats = (req, res, next) => {
     CoronaStats
         .fetchAll()
         .then(stats => {
-            let totalWorldConfirmed = 0;
-            let totalWorldDeaths = 0;
-            let totalWorldRecovered = 0;
-            for(stat of stats) {
-                const lastStatsItem = stat['stats'].slice(-1)[0];
-                totalWorldConfirmed += lastStatsItem.confirmed;
-                totalWorldDeaths += lastStatsItem.deaths;
-                totalWorldRecovered += lastStatsItem.recovered;
-            }
             res.status(200).json({
-                "total_world_stats":{
-                    "confirmed" : totalWorldConfirmed,
-                    "deaths" : totalWorldDeaths,
-                    "recovered" : totalWorldRecovered,
-                },
-                "country_stats": stats
+                "world_stats" : getRowFromObject(stats,"World"),
+                "country_stats": removeRowFromObject(stats,"World")
             });
         })
         .catch(err => {
             next(err);
-        })
+        });
+};
+
+/**
+ *
+ * @param array
+ * @param key
+ * @returns {*}
+ */
+const getRowFromObject = (array,key) =>{
+    return array.filter(function (array) {
+        return array.country === key;
+    })
+};
+
+/**
+ *
+ * @param array
+ * @param key
+ * @returns {*}
+ */
+const removeRowFromObject = (array,key) =>{
+    return array.filter(function (array) {
+        return array.country !== key;
+    })
 };
