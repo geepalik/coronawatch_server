@@ -1,3 +1,6 @@
+const env = process.env.NODE_ENV || 'development';
+const config = require('./config/env/'+env);
+
 const express = require('express');
 const app = express();
 const mongoConnect = require('./util/database').mongoConnect;
@@ -17,4 +20,4 @@ app.use((req, res, next) => {
 app.use('/coronawatch',statsRoutes);
 
 mongoConnect();
-app.listen(8080);
+app.listen(config.port);

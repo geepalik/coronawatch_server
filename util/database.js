@@ -1,13 +1,14 @@
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config/env/'+env);
 
+const {MongoClient} = require('mongodb');
 let _db;
 
 /**
  * connecting and storing connection to db
  */
 const mongoConnect = () => {
-    MongoClient.connect('mongodb+srv://coronauser:coronapass@cluster0-dhgvo.mongodb.net/coronawatch?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true })
+    MongoClient.connect(config.db,{ useNewUrlParser: true, useUnifiedTopology: true })
         .then(client => {
             console.log('Connected! ');
             _db = client.db();
