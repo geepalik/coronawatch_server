@@ -7,29 +7,23 @@ let _db;
 /**
  * connecting and storing connection to db
  */
-const mongoConnect = () => {
-    MongoClient.connect(config.db,{ useNewUrlParser: true, useUnifiedTopology: true })
-        .then(client => {
-            console.log('Connected! ');
-            _db = client.db();
-        })
-        .catch(err => {
-            console.log('Error!: '+err);
-            process.exit(1);
-        })
+const mongoConnect = async () => {
+    const client = new MongoClient(config.db,{ useNewUrlParser: true, useUnifiedTopology: true });
+    await client.connect();
+    _db = client;
 };
 
 /**
- * return access to the connected db
+ * return access to the mongodb client
  * module does connection pooling
  * @returns {*}
  */
-const getDb = () => {
-    if(_db){
-        return _db;
+const getClient = () => {
+    if(!_db){
+        _db = mongoConnect();
     }
-    throw 'No database found';
+    return _db;
 };
 
 exports.mongoConnect = mongoConnect;
-exports.getDb = getDb;
+exports.getClient = getClient;
