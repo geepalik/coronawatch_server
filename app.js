@@ -19,6 +19,10 @@ app.use((req, res, next) => {
 
 app.use('/coronawatch',statsRoutes);
 
+/**
+ *
+ * @returns {Promise<string>}
+ */
 initApp = async () =>{
     try{
         await mongoConnect();
