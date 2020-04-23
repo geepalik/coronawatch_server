@@ -19,5 +19,21 @@ app.use((req, res, next) => {
 
 app.use('/coronawatch',statsRoutes);
 
-mongoConnect();
-app.listen(config.port);
+initApp = async () =>{
+    try{
+        await mongoConnect();
+        app.listen(config.port);
+        return 'Connected!';
+    }
+    catch (err) {
+        throw err;
+    }
+}
+initApp()
+    .then(result => {
+        console.log(result);
+    })
+    .catch(err => {
+        console.log('Error!: '+err);
+        process.exit(1);
+});

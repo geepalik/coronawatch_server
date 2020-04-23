@@ -1,4 +1,5 @@
-const getDb = require('../util/database').getDb;
+const getDb = require('../util/database').getClient;
+const dataBase = "coronawatch";
 const collection = 'corona_stats';
 
 module.exports = class CoronaStats {
@@ -7,13 +8,13 @@ module.exports = class CoronaStats {
         this.stats = stats;
     }
 
-    static fetchAll() {
-        return getDb()
+    static async fetchAll() {
+        const client = await getDb();
+        return await client
+            .db(dataBase)
             .collection(collection)
             .find()
             .project({_id:0})
-            .toArray()
-            .then(results => { return results; })
-            .catch(err => console.error('fetchall error: '+err) );
+            .toArray();
     }
 };
