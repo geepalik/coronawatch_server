@@ -7,7 +7,7 @@ const mongoConnect = require('./util/database').mongoConnect;
 const statsRoutes = require('./routes/statsRoutes');
 
 app.use((req, res, next) => {
-    //allow access from every, elminate CORS
+    //allow access from every, eliminate CORS
     res.setHeader('Access-Control-Allow-Origin','*');
     //set the allowed HTTP methods to be requested
     res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, PATCH, DELETE');
@@ -20,7 +20,9 @@ app.use((req, res, next) => {
 app.use('/coronawatch',statsRoutes);
 
 /**
- *
+ * run this function on startup
+ * create db connection for pooling from models
+ * and listen to port for incoming connections
  * @returns {Promise<string>}
  */
 initApp = async () =>{
@@ -33,6 +35,7 @@ initApp = async () =>{
         throw err;
     }
 }
+
 initApp()
     .then(result => {
         console.log(result);

@@ -6,6 +6,7 @@ let _db;
 
 /**
  * connecting and storing connection to db
+ * @returns {Promise<void>}
  */
 const mongoConnect = async () => {
     const client = new MongoClient(config.db,{ useNewUrlParser: true, useUnifiedTopology: true });
@@ -16,7 +17,7 @@ const mongoConnect = async () => {
 /**
  * return access to the mongodb client
  * module does connection pooling
- * @returns {*}
+ * @returns {Promise<void>}
  */
 const getClient = () => {
     if(!_db){
