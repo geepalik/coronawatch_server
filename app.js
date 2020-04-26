@@ -4,6 +4,8 @@ const config = require('./config/env/'+env);
 const express = require('express');
 const app = express();
 const mongoConnect = require('./util/database').mongoConnect;
+const cron = require('node-cron');
+const updateStats = require('./cron/stats').updateStatsData;
 const statsRoutes = require('./routes/statsRoutes');
 
 app.use((req, res, next) => {
@@ -29,6 +31,12 @@ initApp = async () =>{
     try{
         await mongoConnect();
         app.listen(config.port);
+        cron.schedule("* * * * *", () =>{
+            console.log("---------------------");
+            console.log("Running Cron Job");
+            updateStats();
+        })
+
         return 'Connected!';
     }
     catch (err) {
