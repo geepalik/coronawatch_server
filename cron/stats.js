@@ -24,8 +24,7 @@ const getDataUrl = () =>{
 
 const getData = async () =>{
     try{
-        const response = await axios.get(getDataUrl());
-        const data = response.data;
+        const {data} = await axios.get(getDataUrl());
         await updateStats(data);
     }catch (e) {
         console.error("Error with retrieving data");
