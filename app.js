@@ -31,7 +31,7 @@ initApp = async () =>{
     try{
         await mongoConnect();
         app.listen(config.port);
-        cron.schedule("* * * * *", () =>{
+        cron.schedule("*/30 * * * *", () =>{
             console.log("---------------------");
             console.log("Running Cron Job");
             updateStats();
