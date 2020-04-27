@@ -27,7 +27,6 @@ const getData = async () =>{
         const response = await axios.get(getDataUrl());
         const data = response.data;
         await updateStats(data);
-        console.log("got data");
     }catch (e) {
         console.error("Error with retrieving data");
         throw "Error in data: "+e.toString();
@@ -122,16 +121,8 @@ const updateStats = async (latestCoronaStats) => {
 const setDataForUpdate = (savedStatsArray, updatedCountryStats) => {
     const lastStatsItem = savedStatsArray.slice(-1)[0];
 
-    if(isNaN(updatedCountryStats.cases)){
-        updatedCountryStats.confirmed = lastStatsItem.confirmed;
-    }
-
-    if(isNaN(updatedCountryStats.deaths)){
-        updatedCountryStats.deaths = lastStatsItem.deaths;
-    }
-
-    if(isNaN(updatedCountryStats.recovered)){
-        updatedCountryStats.recovered = lastStatsItem.recovered;
+    if(!updatedCountryStats.cases){
+        updatedCountryStats.cases = updatedCountryStats.confirmed;
     }
 
     if(lastStatsItem.date === getCurrentDateFormatted()){
