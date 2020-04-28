@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "pretest": "eslint --ignore-path .gitignore ."
   },
   "keywords": [],
   "author": "Gil Palikaras",
   "license": "ISC",
   "devDependencies": {
+    "eslint": "^6.8.0",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
