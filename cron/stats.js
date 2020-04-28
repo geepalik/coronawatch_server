@@ -90,6 +90,12 @@ const updateStats = async (latestCoronaStats) => {
         totalWorldConfirmed += totalStats.confirmed;
         totalWorldDeaths += totalStats.deaths;
         totalWorldRecovered += totalStats.recovered;
+
+        if(equalSavedApiData(result.stats, updatedCountryStats)){
+            console.log(`${result.country} doesnt have change in stats, skipping update`);
+            continue;
+        }
+
         await CoronaStats.update(
             {"country":result.country},
             {$set:{"country_total_stats":totalStats,"stats":statsArray}}
@@ -103,12 +109,35 @@ const updateStats = async (latestCoronaStats) => {
             deaths:totalWorldDeaths,
             recovered:totalWorldRecovered
         };
-    const worldStatsArray = setDataForUpdate(savedWorldData.stats, worldTotalStats);
-    await CoronaStats.update(
-        {"country":"World"},
-        {$set:{"world_total_stats":worldTotalStats,"stats":worldStatsArray}}
+
+    if(!equalSavedApiData(savedWorldData.stats, worldTotalStats)){
+        const worldStatsArray = setDataForUpdate(savedWorldData.stats, worldTotalStats);
+        await CoronaStats.update(
+            {"country":"World"},
+            {$set:{"world_total_stats":worldTotalStats,"stats":worldStatsArray}}
         );
-    console.log(`Updated World with data for date ${getCurrentDateFormatted()}`);
+        console.log(`Updated World with data for date ${getCurrentDateFormatted()}`);
+    }else{
+        console.log(`World doesnt have change in stats, skipping update`);
+    }
+}
+
+/**
+ * if incoming data are the same as saved, dont update
+ * @param savedStatsArray
+ * @param updatedCountryStats
+ * @returns {boolean}
+ */
+const equalSavedApiData = (savedStatsArray, updatedCountryStats) => {
+    if(!updatedCountryStats.cases){
+        updatedCountryStats.cases = updatedCountryStats.confirmed;
+    }
+    const lastStatsItem = savedStatsArray.slice(-1)[0];
+    return (
+        updatedCountryStats.cases === lastStatsItem.confirmed ||
+        updatedCountryStats.deaths === lastStatsItem.deaths ||
+        updatedCountryStats.recovered === lastStatsItem.recovered
+    )
 }
 
 /**
