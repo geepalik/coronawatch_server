@@ -1,16 +1,16 @@
 language: node_js
 node_js:
-  - 8
-  - 10
+- 8
+- 10
 before_install:
-  - npm install -g npm
+- npm install -g npm
 script:
-  - npm install
-  - npm run pretest
+- npm install
+- npm run pretest
 deploy:
   provider: heroku
   api_key:
-    secure: oEPSpinuT4ft5kYJRIsdz3E3SF1spSW7VIX5hYNpFpVUOtw4Q6CrjBSrNGrhF1kJ5xInU+Jji88aEcpoZQi7WRdagPu9axBjMr5mWN1vGHZ4ce5uAN6knwl9/AW1YmPo4ZGhrWqkQgiiYZTMI3/15P1TV22gJPv16fs5q0ua1FqygxbxXxxN6DG3jw0sqm9co8/NIfa59uAnETnWj4Exf7lfdUDJa/3pW77m/VtwMtB6kyz2HoqQ4mb5plJV+zCkcW7wa6Mrm2KRAaNO3LwjZwJCckdWaeA8Uyd+bVtEjHWfMNAyrHGCqje49R8A5vTKNhZIve8IRUAKdJO2EuUBatN+HQdEKqkDtyzcLskKM35LJ8wC23jnY49V2HGh6dJmYsniEilM+XUrdrUUDb+uDVqzdLZl8jX0qsy3uwmEd18i8hMyM5KEa8A5wl35WWUP1gMaGcOdbmgHwXNq9r5Pnz2TETgxc7p+L9JXUFAHzoul8cNvIr7PEyyGxBsPFxZvAPUHsJD1WWry79fbYGcu5Ot7aTVsKcQnYrkG/kjk1kZvPUUgNgsT69Qsw+JS6Mh6emwTK8lopPxMuw9kj09Eg2qJ4aNHyl6/GOs2RB3pHry0D7s+HcaxOTRZelHrK3jxyGelxMO3y4uaYW0t1fRtfx14h49670XyfQrUlFSS98I=
+    secure: RTX23iBR3MWwRAxx7WBSA0gLnQn/zoMxHwbca0mT2qnvZS5uUM7OyAOVw4zrmhN7WHd56bNjf07YoYaLhDXss18+YSnFcpyX8prkcM8YpUT5naSinXBvIM0LTZxqbZvfzHBKfjYYHaJvkYVjpIq0kAfl2n7IfTn8Dx7deHPTNRjesq3NMk6vh/cjgpTnSMphTTXsRvLOgBAycZ8A0Ajdj36QYWbKSdb+WAvv/uDNr3rdmAdCyU5jSPiPXedD8LF+YR4bUIqhx/glPoPKXYzwTYdNixxmL+X6FYPrnb7Xcj7GTCZpQwjVzijWPvhpfHJb4bi9SnIvtURM8Gs+iYPTyCGxNUeuWI0WxpAhDQPYHDBvTydMrQY7nSUDDPMMxLjW/QbbvOBeg2exngFZh4t1B3nQhG3Hzu8wmaOmf1va3VKBAFEdKlYqyKveelwMGe6M5h40IB+Gvl175to6uLpH6lWOWGEdy/ImJQo9qHwDlmuN3mL0medyXT6xJE7lBmOOcR4s3Zwsjldipsg9Ki9EK5IlcNL4Wtctb/qNsWm9SEY82qPSUiGAavDma3Ce3ex6Cz4nxhLkoJk2NtyQkHyiKbVcEMsLkSZoczR06k23/5y/Tt6/7yw9ZOxoQLntjaxqNxkW5JTiv5m0paXPe00kDNnol9bH0q7WVOhZ1IsSGmE=
   app: corona-watch-server
   on:
     repo: geepalik/coronawatch_server
