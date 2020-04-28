@@ -36,7 +36,6 @@ initApp = async () =>{
             console.log("Running Cron Job");
             updateStats();
         })
-
         return 'Connected!';
     }
     catch (err) {
