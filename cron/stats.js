@@ -80,8 +80,13 @@ const updateStats = async (latestCoronaStats) => {
             continue;
         }
         updatedCountryStats = updatedCountryStats[0];
-        const statsArray = setDataForUpdate(result.stats, updatedCountryStats);
 
+        if(equalSavedApiData(result.stats, updatedCountryStats)){
+            console.log(`${result.country} doesnt have change in stats, skipping update`);
+            continue;
+        }
+
+        const statsArray = setDataForUpdate(result.stats, updatedCountryStats);
         const totalStats = {
             "confirmed":updatedCountryStats.cases,
             "deaths":updatedCountryStats.deaths,
@@ -90,11 +95,6 @@ const updateStats = async (latestCoronaStats) => {
         totalWorldConfirmed += totalStats.confirmed;
         totalWorldDeaths += totalStats.deaths;
         totalWorldRecovered += totalStats.recovered;
-
-        if(equalSavedApiData(result.stats, updatedCountryStats)){
-            console.log(`${result.country} doesnt have change in stats, skipping update`);
-            continue;
-        }
 
         await CoronaStats.update(
             {"country":result.country},
@@ -134,8 +134,8 @@ const equalSavedApiData = (savedStatsArray, updatedCountryStats) => {
     }
     const lastStatsItem = savedStatsArray.slice(-1)[0];
     return (
-        updatedCountryStats.cases === lastStatsItem.confirmed ||
-        updatedCountryStats.deaths === lastStatsItem.deaths ||
+        updatedCountryStats.cases === lastStatsItem.confirmed &&
+        updatedCountryStats.deaths === lastStatsItem.deaths &&
         updatedCountryStats.recovered === lastStatsItem.recovered
     )
 }
