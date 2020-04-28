@@ -20,6 +20,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/coronawatch',statsRoutes);
+app.use('/',statsRoutes);
 
 /**
  * run this function on startup

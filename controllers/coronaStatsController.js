@@ -12,6 +12,13 @@ exports.getStats = async (req, res, next) => {
     }
 };
 
+exports.notFound = (req, res, next) => {
+    res.status(400).json({
+        status: 'Error!',
+        message: 'Action not recognized'
+    });
+};
+
 /**
  *
  * @param array
