@@ -1,6 +1,5 @@
-const env = process.env.NODE_ENV || 'development';
-const config = require('../config/env/'+env);
-const dbString = process.env.MONGODB_URL || config.db;
+const dotenv = require('dotenv');
+dotenv.config();
 
 const {MongoClient} = require('mongodb');
 let _db;
@@ -10,7 +9,7 @@ let _db;
  * @returns {Promise<void>}
  */
 const mongoConnect = async () => {
-    const client = new MongoClient(dbString,{ useNewUrlParser: true, useUnifiedTopology: true });
+    const client = new MongoClient(process.env.MONGODB_URL,{ useNewUrlParser: true, useUnifiedTopology: true });
     await client.connect();
     _db = client;
 };

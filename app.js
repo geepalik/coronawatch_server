@@ -1,5 +1,5 @@
-const env = process.env.NODE_ENV || 'development';
-const config = require('./config/env/'+env);
+const dotenv = require('dotenv');
+dotenv.config();
 
 const express = require('express');
 const app = express();
@@ -30,7 +30,7 @@ app.use('/coronawatch',statsRoutes);
 initApp = async () =>{
     try{
         await mongoConnect();
-        app.listen(config.port);
+        app.listen(process.env.PORT);
         cron.schedule("*/30 * * * *", () =>{
             console.log("---------------------");
             console.log("Running Cron Job");
