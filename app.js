@@ -9,6 +9,8 @@ const updateStats = require('./cron/stats').updateStatsData;
 const statsRoutes = require('./routes/statsRoutes');
 
 app.use((req, res, next) => {
+    //allow access from every, eliminate CORS
+    res.setHeader('Access-Control-Allow-Origin','*');
     //set the allowed HTTP methods to be requested
     res.setHeader('Access-Control-Allow-Methods','GET, POST, PUT, PATCH, DELETE');
     //headers clients can use in their requests
