@@ -1,11 +1,12 @@
 const express = require('express');
 const coronaStatsController = require('../controllers/coronaStatsController');
 const router = express.Router();
+const cors = require('../middleware/cors');
 
-router.get('/stats',coronaStatsController.getStats);
+router.get('/stats',cors, coronaStatsController.getStats);
 
 //default
-router.get('*',coronaStatsController.notFound);
-router.get('/',coronaStatsController.notFound);
+router.get('*',cors, coronaStatsController.notFound);
+router.get('/',cors, coronaStatsController.notFound);
 
 module.exports = router;
