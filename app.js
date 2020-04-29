@@ -32,11 +32,11 @@ initApp = async () =>{
     try{
         await mongoConnect();
         app.listen(process.env.PORT);
-        cron.schedule("*/30 * * * *", () =>{
-            console.log("---------------------");
-            console.log("Running Cron Job");
-            updateStats();
-        })
+        //cron.schedule("*/30 * * * *", () =>{
+        //    console.log("---------------------");
+        //    console.log("Running Cron Job");
+        //    updateStats();
+        //})
         return 'Connected!';
     }
     catch (err) {
