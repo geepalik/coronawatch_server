@@ -81,11 +81,6 @@ const updateStats = async (latestCoronaStats) => {
         }
         updatedCountryStats = updatedCountryStats[0];
 
-        if(equalSavedApiData(result.stats, updatedCountryStats)){
-            console.log(`${result.country} doesnt have change in stats, skipping update`);
-            continue;
-        }
-
         const statsArray = setDataForUpdate(result.stats, updatedCountryStats);
         const totalStats = {
             "confirmed":updatedCountryStats.cases,
@@ -110,16 +105,12 @@ const updateStats = async (latestCoronaStats) => {
             recovered:totalWorldRecovered
         };
 
-    if(!equalSavedApiData(savedWorldData.stats, worldTotalStats)){
-        const worldStatsArray = setDataForUpdate(savedWorldData.stats, worldTotalStats);
-        await CoronaStats.update(
-            {"country":"World"},
-            {$set:{"world_total_stats":worldTotalStats,"stats":worldStatsArray}}
-        );
-        console.log(`Updated World with data for date ${getCurrentDateFormatted()}`);
-    }else{
-        console.log(`World doesnt have change in stats, skipping update`);
-    }
+    const worldStatsArray = setDataForUpdate(savedWorldData.stats, worldTotalStats);
+    await CoronaStats.update(
+        {"country":"World"},
+        {$set:{"world_total_stats":worldTotalStats,"stats":worldStatsArray}}
+    );
+    console.log(`Updated World with data for date ${getCurrentDateFormatted()}`);
 }
 
 /**
