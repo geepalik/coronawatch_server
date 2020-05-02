@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/geepalik/coronawatch_server.svg?branch=master)](https://travis-ci.org/geepalik/coronawatch_server)
 # CoronaWatch - COVID-19 World Statistics - server side
 Web service for https://github.com/geepalik/coronawatch in NodeJS    
 * REST API to return data to client
