@@ -21,6 +21,11 @@ module.exports = class CoronaStats {
             .toArray();
     }
 
+    /**
+     *
+     * @param countryName
+     * @returns {Promise<*>}
+     */
     static async getSingleCountry(countryName){
         const client = await getDb();
         return await client
